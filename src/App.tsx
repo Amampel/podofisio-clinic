@@ -56,7 +56,7 @@ export default function App() {
             muted
             loop
             playsInline
-            className="w-full h-full object-cover grayscale brightness-75"
+            className="w-full h-full object-cover object-center grayscale brightness-75"
           >
             <source src="https://podofisioclinic.com/wp-content/uploads/2026/02/0_Physiotherapy_Chiropractic_1920x1080.mp4" type="video/mp4" />
           </video>
