@@ -299,9 +299,14 @@ export default function App() {
 
       {/* Footer */}
       <footer className="relative z-20 py-16 px-6 text-center border-t border-white/5 bg-black">
-        <p className="text-[9px] uppercase tracking-[0.5em] text-white/10">
-          © {new Date().getFullYear()} FISIOPOD • MADRID
-        </p>
+        <div className="space-y-4">
+          <p className="text-[10px] uppercase tracking-[0.5em] text-white/40">
+            © {new Date().getFullYear()} Podofisio Clinic - Terrassa
+          </p>
+          <p className="text-[9px] uppercase tracking-[0.4em] text-white/20">
+            Desarrollado por <a href="https://kivomarketing.com" target="_blank" rel="noopener noreferrer" className="hover:text-white transition-colors underline decoration-white/10 underline-offset-4">KivoMarketing</a>
+          </p>
+        </div>
       </footer>
     </div>
   );
