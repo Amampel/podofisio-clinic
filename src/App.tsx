@@ -35,7 +35,7 @@ export default function App() {
   // Background effects tied to scroll
   const videoScale = useTransform(smoothProgress, [0, 0.2, 0.5, 1], [1, 1.2, 1.5, 2]);
   const videoBlur = useTransform(smoothProgress, [0, 0.1, 0.3], ["blur(0px)", "blur(4px)", "blur(10px)"]);
-  const videoOpacity = useTransform(smoothProgress, [0, 0.5, 0.8, 1], [0.8, 0.4, 0.1, 0]);
+  const videoOpacity = useTransform(smoothProgress, [0, 0.5, 0.8, 1], [0.7, 0.35, 0.1, 0]);
 
   // Spotlight / Lighting tied to scroll
   const spotlightScale = useTransform(smoothProgress, [0, 0.5, 1], [1, 1.5, 0.8]);
@@ -50,13 +50,13 @@ export default function App() {
           style={{ scale: videoScale, filter: videoBlur, opacity: videoOpacity }}
           className="w-full h-full"
         >
-          <div className="absolute inset-0 bg-black/30 z-10" />
+          <div className="absolute inset-0 bg-black/40 z-10" />
           <video
             autoPlay
             muted
             loop
             playsInline
-            className="w-full h-full object-cover object-center grayscale brightness-75"
+            className="w-full h-full object-cover object-center grayscale brightness-60"
           >
             <source src="https://podofisioclinic.com/wp-content/uploads/2026/02/0_Physiotherapy_Chiropractic_1920x1080.mp4" type="video/mp4" />
           </video>
