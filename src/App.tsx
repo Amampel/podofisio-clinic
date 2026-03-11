@@ -235,6 +235,11 @@ export default function App() {
               <motion.button
                 whileHover="hover"
                 whileTap={{ scale: 0.98 }}
+                onClick={() => {
+                  const phoneNumber = "34697657485";
+                  const message = "Hola! He visto vuestro vídeo de la clínica y me gustaría reservar una cita para la apertura y aprovechar la promoción. ¿Tenéis alguna hora disponible?";
+                  window.open(`https://wa.me/${phoneNumber}?text=${encodeURIComponent(message)}`, '_blank');
+                }}
                 className="group relative w-full py-10 bg-transparent border border-white/20 overflow-hidden transition-all duration-500"
               >
                 {/* Futuristic Corner Brackets */}
@@ -277,7 +282,7 @@ export default function App() {
                     variants={{ hover: { color: "#000", letterSpacing: "0.4em" } }}
                     className="text-xl md:text-3xl font-bold text-white tracking-[0.2em] transition-all duration-500"
                   >
-                    QUIERO MI PLAZA
+                    Reserva tu plaza
                   </motion.span>
                 </div>
 
