@@ -1,6 +1,8 @@
 import React, { useRef, useEffect } from 'react';
 import { motion, useScroll, useTransform, useSpring } from 'motion/react';
 import { ChevronDown, ArrowDown, Activity, Footprints } from 'lucide-react';
+import { useInView } from 'react-intersection-observer';
+import YouTube, { YouTubeEvent, YouTubePlayer } from 'react-youtube';
 import backgroundVideo from '../assets/videos/5794352_Coll_wavebreak_Physio_1920x1080.mp4';
 const ScrollSection = ({ children, progressRange, opacityRange, scaleRange, yRange }: any) => {
   const { scrollYProgress } = useScroll();
@@ -17,10 +19,37 @@ const ScrollSection = ({ children, progressRange, opacityRange, scaleRange, yRan
 
 export default function App() {
   const containerRef = useRef(null);
+  const playerRef = useRef<YouTubePlayer | null>(null);
+
   const { scrollYProgress } = useScroll({
     target: containerRef,
     offset: ["start start", "end end"]
   });
+
+  // Intersection observer for Video
+  const { ref: videoRef, inView: videoInView } = useInView({
+    threshold: 0.2, // trigger when 20% visible
+  });
+
+  // Effect to play/pause video based on visibility without losing time
+  useEffect(() => {
+    if (playerRef.current) {
+      if (videoInView) {
+        playerRef.current.playVideo();
+      } else {
+        playerRef.current.pauseVideo();
+      }
+    }
+  }, [videoInView]);
+
+  const onReady = (event: YouTubeEvent) => {
+    playerRef.current = event.target;
+    // Autoplay requires mute initially to work without user interaction in most browsers, 
+    // but we leave it as normal as the playVideo will be triggered by scroll.
+    if (videoInView) {
+      event.target.playVideo();
+    }
+  };
 
   // Smooth scroll progress for some effects
   const smoothProgress = useSpring(scrollYProgress, {
@@ -101,10 +130,42 @@ export default function App() {
           </motion.div>
         </section>
 
+        {/* Video Section */}
+        <section className="min-h-[60vh] md:min-h-[80vh] flex flex-col items-center justify-center px-4 md:px-24">
+          <ScrollSection
+            progressRange={[0.05, 0.15, 0.25]}
+            opacityRange={[0, 1, 0]}
+            scaleRange={[0.9, 1, 0.95]}
+            yRange={[50, 0, -50]}
+          >
+            <div ref={videoRef} className="w-full max-w-5xl mx-auto p-1 md:p-2 rounded-[2rem] md:rounded-[3rem] bg-gradient-to-b from-white/20 to-transparent shadow-[0_0_50px_rgba(255,255,255,0.1)] backdrop-blur-sm">
+              <div className="w-full rounded-[1.8rem] md:rounded-[2.8rem] overflow-hidden relative aspect-video bg-black">
+                <YouTube
+                  videoId="ECnIN5BK-g8"
+                  onReady={onReady}
+                  opts={{
+                    width: '100%',
+                    height: '100%',
+                    playerVars: {
+                      autoplay: 1, // We let the script handle play/pause by view
+                      controls: 1,
+                      rel: 0,
+                      modestbranding: 1,
+                      loop: 1,
+                      playlist: 'ECnIN5BK-g8'
+                    },
+                  }}
+                  className="absolute top-0 left-0 w-full h-full [&>iframe]:w-full [&>iframe]:h-full"
+                />
+              </div>
+            </div>
+          </ScrollSection>
+        </section>
+
         {/* Narrative Section 1 */}
         <section className="min-h-[80vh] flex flex-col items-center justify-center px-6 md:px-24">
           <ScrollSection
-            progressRange={[0.05, 0.15, 0.25]}
+            progressRange={[0.15, 0.25, 0.35]}
             opacityRange={[0, 1, 0]}
             scaleRange={[0.9, 1, 0.95]}
             yRange={[50, 0, -50]}
@@ -123,7 +184,7 @@ export default function App() {
         {/* Section 2: The Question */}
         <section className="min-h-[80vh] flex flex-col items-center justify-center px-6">
           <ScrollSection
-            progressRange={[0.2, 0.3, 0.4]}
+            progressRange={[0.3, 0.4, 0.5]}
             opacityRange={[0, 1, 0]}
             scaleRange={[0.7, 1, 1.3]}
             yRange={[50, 0, -50]}
@@ -141,7 +202,7 @@ export default function App() {
         {/* Section 3: The Clue */}
         <section className="min-h-[80vh] flex flex-col items-center justify-center px-6 md:px-24">
           <ScrollSection
-            progressRange={[0.4, 0.5, 0.6]}
+            progressRange={[0.45, 0.55, 0.65]}
             opacityRange={[0, 1, 0]}
             scaleRange={[0.95, 1, 0.95]}
             yRange={[50, 0, -50]}
@@ -165,8 +226,8 @@ export default function App() {
           </div>
           <motion.div
             style={{
-              height: useTransform(smoothProgress, [0.5, 0.65], ["0%", "100%"]),
-              opacity: useTransform(smoothProgress, [0.5, 0.65], [0, 1]),
+              height: useTransform(smoothProgress, [0.55, 0.7], ["0%", "100%"]),
+              opacity: useTransform(smoothProgress, [0.55, 0.7], [0, 1]),
             }}
             className="w-[2px] bg-gradient-to-b from-transparent via-white to-white shadow-[0_0_20px_white] relative z-10"
           >
@@ -180,7 +241,7 @@ export default function App() {
         {/* Section 4: Conditions */}
         <section className="min-h-screen py-20 px-6 md:px-24 flex flex-col items-center justify-center">
           <ScrollSection
-            progressRange={[0.6, 0.75, 0.9]}
+            progressRange={[0.65, 0.8, 0.9]}
             opacityRange={[0, 1, 0]}
             scaleRange={[0.98, 1, 0.98]}
             yRange={[50, 0, -50]}
