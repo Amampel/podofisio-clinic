@@ -1,7 +1,7 @@
 import React, { useRef, useEffect } from 'react';
 import { motion, useScroll, useTransform, useSpring } from 'motion/react';
 import { ChevronDown, ArrowDown, Activity, Footprints } from 'lucide-react';
-
+import backgroundVideo from '../assets/videos/5794352_Coll_wavebreak_Physio_1920x1080.mp4';
 const ScrollSection = ({ children, progressRange, opacityRange, scaleRange, yRange }: any) => {
   const { scrollYProgress } = useScroll();
   const opacity = useTransform(scrollYProgress, progressRange, opacityRange);
@@ -58,7 +58,7 @@ export default function App() {
             playsInline
             className="w-full h-full object-cover object-center grayscale brightness-60"
           >
-            <source src="https://podofisioclinic.com/wp-content/uploads/2026/02/0_Physiotherapy_Chiropractic_1920x1080.mp4" type="video/mp4" />
+            <source src={backgroundVideo} type="video/mp4" />
           </video>
         </motion.div>
       </div>
@@ -236,7 +236,7 @@ export default function App() {
                 whileHover="hover"
                 whileTap={{ scale: 0.98 }}
                 onClick={() => {
-                  const phoneNumber = "34697657485";
+                  const phoneNumber = "34624578754";
                   const message = "Hola! He visto vuestro vídeo de la clínica y me gustaría reservar una cita para la apertura y aprovechar la promoción. ¿Tenéis alguna hora disponible?";
                   window.open(`https://wa.me/${phoneNumber}?text=${encodeURIComponent(message)}`, '_blank');
                 }}
