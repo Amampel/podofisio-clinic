@@ -131,7 +131,7 @@ export default function App() {
         </section>
 
         {/* Video Section */}
-        <section className="min-h-[60vh] md:min-h-[80vh] flex flex-col items-center justify-center px-4 md:px-24">
+        <section className="-mt-24 md:-mt-32 py-2 md:py-8 flex flex-col items-center justify-center px-4 md:px-24 relative z-30">
           <ScrollSection
             progressRange={[0.05, 0.15, 0.25]}
             opacityRange={[0, 1, 0]}
@@ -163,7 +163,7 @@ export default function App() {
         </section>
 
         {/* Narrative Section 1 */}
-        <section className="min-h-[80vh] flex flex-col items-center justify-center px-6 md:px-24">
+        <section className="min-h-[60vh] flex flex-col items-center justify-center px-6 md:px-24">
           <ScrollSection
             progressRange={[0.15, 0.25, 0.35]}
             opacityRange={[0, 1, 0]}
@@ -257,13 +257,21 @@ export default function App() {
               {/* Pricing Table - Simple & Clean */}
               <div className="max-w-md mx-auto border border-white/20 rounded-2xl p-8 bg-white/5 backdrop-blur-xl space-y-6 shadow-2xl">
                 {[
-                  { name: "Estudio + Plantillas", price: "140€" },
-                  { name: "Fisioterapia", price: "45€" },
-                  { name: "Podología", price: "30€" }
+                  { name: "Podología", price: "30€" },
+                  { name: "Fisioterapia", price: "50€" },
+                  { name: "Estudio + Plantillas", price: "180€" },
+                  { name: "Pack revisión completa", price: "220€", description: "(incluye podología, fisioterapia y estudio biomecánico/plantillas)" },
                 ].map((item, i) => (
                   <div key={i} className="flex justify-between items-center border-b border-white/10 pb-4 last:border-0">
-                    <span className="text-sm md:text-base text-white/80">{item.name}</span>
-                    <span className="text-xl md:text-2xl font-bold text-white">{item.price}</span>
+                    <div className="flex flex-col pr-4 text-left">
+                      <span className="text-sm md:text-base text-white/80">{item.name}</span>
+                      {item.description && (
+                        <span className="text-xs text-white/50 mt-1">
+                          {item.description}
+                        </span>
+                      )}
+                    </div>
+                    <span className="text-xl md:text-2xl font-bold text-white whitespace-nowrap">{item.price}</span>
                   </div>
                 ))}
               </div>
