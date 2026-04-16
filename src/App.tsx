@@ -250,7 +250,7 @@ export default function App() {
               <h4 className="text-xs uppercase tracking-[0.6em] text-white/60 mb-8 font-bold">Condiciones Especiales de Preapertura</h4>
 
               <div className="space-y-6 text-lg md:text-2xl font-light text-white serif">
-                <p>Estamos ultimando la clínica para abrir a mediados-finales de abril.</p>
+                <p>Estamos ultimando la clínica para abrir el 4 de Mayo.</p>
                 <p>Hemos decidido abrir la agenda antes de abrir la puerta.</p>
               </div>
 
